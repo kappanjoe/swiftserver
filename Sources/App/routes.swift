@@ -5,12 +5,12 @@ func routes(_ app: Application) throws {
         "It works!"
     }
 
-    app.get("hello") { req async -> String in
-        "Hello, world!"
+    app.get("hello") { req -> EventLoopFuture<View> in
+		return req.view.render("hello", ["name": "Leaf"])
     }
 	
-	app.get("hello", ":name") { req -> String in
+	app.get("hello", ":name") { req async throws -> View in
 		let name = req.parameters.get("name")!
-		return "Hello, \(name)!"
+		return try await req.view.render("hello", ["name": name])
 	}
 }
