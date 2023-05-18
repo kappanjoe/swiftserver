@@ -21,3 +21,7 @@ extension ByteBuffer {
 struct Connect: Codable {
 	let connect: Bool
 }
+
+struct Yo: Codable {
+	let message: String
+}
