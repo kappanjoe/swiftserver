@@ -13,18 +13,4 @@ func routes(_ app: Application) throws {
 		let name = req.parameters.get("name")!
 		return "Hello, \(name)!"
 	}
-	
-	app.webSocket("yo") { req, ws in
-		// Connected WebSocket
-		
-		ws.onText { ws, text in
-			switch text {
-			case "yo":
-				ws.send("hey")
-			default:
-				return
-			}
-		}
-		
-	}
 }

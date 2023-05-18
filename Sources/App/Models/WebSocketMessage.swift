@@ -17,3 +17,7 @@ extension ByteBuffer {
 		try? JSONDecoder().decode(WebSocketMessage<T>.self, from: self)
 	}
 }
+
+struct Connect: Codable {
+	let connect: Bool
+}
