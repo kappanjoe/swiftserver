@@ -1,5 +1,5 @@
 //
-//  ConnectionSystem.swift
+//  ConnectionController.swift
 //  
 //
 //  Created by Joseph Van Alstyne on 5/18/23.
@@ -7,7 +7,7 @@
 
 import Vapor
 
-class ConnectionSystem {
+class ConnectionController {
 	var clients: WebSocketClients
 	
 	init(eventLoop: EventLoop) {

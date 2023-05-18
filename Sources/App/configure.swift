@@ -5,10 +5,10 @@ public func configure(_ app: Application) async throws {
     // uncomment to serve files from /Public folder
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 	
-	let connectionSystem = ConnectionSystem(eventLoop: app.eventLoopGroup.next())
+	let connectionController = ConnectionController(eventLoop: app.eventLoopGroup.next())
 	
 	app.webSocket("channel") { req, ws in
-		connectionSystem.connect(ws)
+		connectionController.connect(ws)
 	}
 	
     // register routes
