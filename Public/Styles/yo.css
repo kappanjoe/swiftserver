@@ -1,0 +1,19 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	display: flex;
+	height: 100vh;
+}
+
+button {
+	width: 10rem;
+	height: 10rem;
+	background-color: limegreen;
+	border-radius: 10rem;
+	border: none;
+	font-size: 5rem;
+	margin: auto;
+}

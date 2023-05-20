@@ -1,9 +1,9 @@
 import Vapor
 
 func routes(_ app: Application) throws {
-    app.get { req async in
-        "It works!"
-    }
+	app.get() { req -> EventLoopFuture<View> in
+		return req.view.render("yo")
+	}
 
     app.get("hello") { req -> EventLoopFuture<View> in
 		return req.view.render("hello", ["name": "Leaf"])
