@@ -26,8 +26,10 @@ class ConnectionController {
 				let sender: WebSocketClient = self.clients.find(msg.client)
 			{
 				let recipients = self.clients.active.filter { $0.id != sender.id }
+				let yoData = try! JSONEncoder().encode(Yo(message: "Yo"))
+				
 				recipients.forEach { recipient in
-					recipient.socket.send("Yo")
+					recipient.socket.send([UInt8](yoData))
 				}
 			}
 		}

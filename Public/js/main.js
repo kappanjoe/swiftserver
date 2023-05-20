@@ -29,12 +29,22 @@ const openWebSocket = () => {
 	
 	ws.onmessage = (event) => {
 		decodeBlob(event.data).then((json) => {
-			console.log("Message received.");
+			console.log("Message received: ", json);
 		});
 	};
 	
 	ws.onclose = () => {
 		console.log("Socket closed.");
+	};
+	
+	let yoButton = document.createElement("button");
+	yoButton.innerText = "Yo";
+	yoButton.onclick = () => {
+		ws.sendData({ message: "Yo" });
+	};
+	
+	window.onload = () => {
+		document.body.appendChild(yoButton);
 	};
 };
 
