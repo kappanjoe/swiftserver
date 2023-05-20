@@ -4,7 +4,11 @@ import Leaf
 import Vapor
 
 public func configure(_ app: Application) async throws {
-	try app.databases.use(.postgres(url: "<connection string>"), as: .psql)
+	try app.databases.use(.postgres(url: ProcessInfo.processInfo.environment["POSTGRES_URL"] ?? ""), as: .psql)
+	app.migrations.add(UserMigration())
+	app.migrations.add(MessageLogMigration())
+	app.migrations.add(MessageRecipientMigration())
+	
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 	app.views.use(.leaf)
 	

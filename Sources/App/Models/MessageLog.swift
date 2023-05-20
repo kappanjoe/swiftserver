@@ -10,7 +10,7 @@ import FluentPostgresDriver
 import Vapor
 
 final class MessageLog: Model {
-	static let schema = "messagelogs"
+	static let schema = "message_logs"
 	
 	@ID(key: .id)
 	var id: UUID?

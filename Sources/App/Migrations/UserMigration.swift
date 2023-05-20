@@ -11,10 +11,13 @@ import Vapor
 
 struct UserMigration: AsyncMigration {
 	func prepare(on database: FluentKit.Database) async throws {
-		// Prepare
+		try await database.schema("users")
+			.id()
+			.field("created_at", .datetime, .required)
+			.create()
 	}
 
 	func revert(on database: FluentKit.Database) async throws {
-		// Revert
+		try await database.schema("users").delete()
 	}
 }
