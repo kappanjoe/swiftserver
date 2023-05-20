@@ -3,7 +3,7 @@ const uuidv4 = () => {
 };
 const uuid = uuidv4();
 
-WebSocket.prototype.sendData = (data) => {
+WebSocket.prototype.sendData = function(data) {
 	const string = JSON.stringify({ client: uuid, data: data });
 	const blob = new Blob([string], { type: "application/json" });
 	this.send(blob);
@@ -21,7 +21,7 @@ const decodeBlob = (blob) => {
 
 let ws = undefined;
 const openWebSocket = () => {
-	ws = new WebSocket("wss://" + window.location.host + "/channel");
+	ws = new WebSocket("ws://" + window.location.host + "/channel");
 	ws.onopen = () => {
 		console.log("Socket opened.");
 		ws.sendData({ connect: true });
@@ -43,3 +43,5 @@ const closeWebSocket = () => {
         ws.close();
     }
 };
+
+openWebSocket();
