@@ -5,6 +5,8 @@
 //  Created by Joseph Van Alstyne on 5/18/23.
 //
 
+import Fluent
+import FluentPostgresDriver
 import Vapor
 
 class ConnectionController {

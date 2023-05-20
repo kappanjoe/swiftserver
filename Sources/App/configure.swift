@@ -1,9 +1,10 @@
+import Fluent
+import FluentPostgresDriver
 import Leaf
 import Vapor
 
-// configures your application
 public func configure(_ app: Application) async throws {
-    // uncomment to serve files from /Public folder
+	try app.databases.use(.postgres(url: "<connection string>"), as: .psql)
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 	app.views.use(.leaf)
 	
@@ -13,6 +14,5 @@ public func configure(_ app: Application) async throws {
 		connectionController.connect(ws)
 	}
 	
-    // register routes
     try routes(app)
 }
