@@ -28,8 +28,12 @@ const openWebSocket = () => {
 	};
 	
 	ws.onmessage = (event) => {
+		let yoText = document.getElementById("receiveYo");
 		decodeBlob(event.data).then((json) => {
-			console.log("Message received: ", json);
+			if (json.message === "Yo") {
+				yoText.className = "received";
+				setTimeout(() => yoText.className = "", 2000);
+			}
 		});
 	};
 	
@@ -37,14 +41,11 @@ const openWebSocket = () => {
 		console.log("Socket closed.");
 	};
 	
-	let yoButton = document.createElement("button");
-	yoButton.innerText = "Yo";
-	yoButton.onclick = () => {
-		ws.sendData({ message: "Yo" });
-	};
-	
 	window.onload = () => {
-		document.body.appendChild(yoButton);
+		let yoButton = document.getElementById("sendYo");
+		yoButton.onclick = () => {
+			ws.sendData({ message: "Yo" });
+		};
 	};
 };
 

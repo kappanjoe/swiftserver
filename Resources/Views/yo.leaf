@@ -8,4 +8,6 @@
 </head>
 
 <body>
+	<p id="receiveYo">Yo</p>
+	<button id="sendYo">Send</button>
 </body>
