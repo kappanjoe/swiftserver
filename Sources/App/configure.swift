@@ -8,6 +8,7 @@ public func configure(_ app: Application) async throws {
 	app.migrations.add(UserMigration())
 	app.migrations.add(MessageLogMigration())
 	app.migrations.add(MessageRecipientMigration())
+	app.migrations.add(UniqueMessageRecipientMigration())
 	
     app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 	app.views.use(.leaf)
@@ -15,7 +16,7 @@ public func configure(_ app: Application) async throws {
 	let connectionController = ConnectionController(eventLoop: app.eventLoopGroup.next())
 	
 	app.webSocket("channel") { req, ws in
-		connectionController.connect(ws)
+		connectionController.connect(ws, db: app.db)
 	}
 	
     try routes(app)

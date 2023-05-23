@@ -26,9 +26,9 @@ final class MessageLog: Model {
 	
 	init() { }
 	
-	init(id: UUID? = nil, senderID: User.IDValue, recipients: String, sentAt: Date? = nil) {
+	init(id: UUID? = nil, senderID: User.IDValue, sentAt: Date? = nil) {
 		self.id = id
-		self.sentAt = sentAt
 		self.$sender.id = senderID
+		self.sentAt = sentAt
 	}
 }

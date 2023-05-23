@@ -16,11 +16,12 @@ class ConnectionController {
 		self.clients = WebSocketClients(eventLoop: eventLoop)
 	}
 	
-	func connect(_ ws: WebSocket) {
+	func connect(_ ws: WebSocket, db: Database) {
 		ws.onBinary { [unowned self] ws, buffer in
 			if let msg: WebSocketMessage = buffer.decodeWebsocketMessage(Connect.self) {
 				let newClient = WebSocketClient(id: msg.client, socket: ws)
 				self.clients.add(newClient)
+				try! await User(id: newClient.id).save(on: db)
 			}
 			
 			if
@@ -33,6 +34,12 @@ class ConnectionController {
 				recipients.forEach { recipient in
 					recipient.socket.send([UInt8](yoData))
 				}
+				
+				let newMessage = MessageLog(senderID: sender.id)
+				try! await newMessage.save(on: db)
+				try! await newMessage.$recipients.attach(recipients.map { recipient in
+					return User(id: recipient.id)
+				}, on: db)
 			}
 		}
 	}
