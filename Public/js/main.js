@@ -32,7 +32,7 @@ const openWebSocket = () => {
 		decodeBlob(event.data).then((json) => {
 			if (json.message === "Yo") {
 				yoText.className = "received";
-				setTimeout(() => yoText.className = "", 2000);
+				setTimeout(() => yoText.className = "", 1000);
 			}
 		});
 	};
